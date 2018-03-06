@@ -1,0 +1,401 @@
+<html>
+  <head>
+    <title>Grid and Flex</title>
+    
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=5,user-scalable=yes,shrink-to-fit=no">
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+    
+      .container {
+        margin: 0 auto;
+        max-width: 1280px;
+        min-height: 100vh;
+        
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas:
+          "header header header"
+          "sidebar main main"
+          "footer footer footer";
+      }
+      
+      @media screen and (max-width: 400px) {
+        .container {
+          grid-template-columns: 1fr;
+          grid-template-areas: 
+            "header"
+            "sidebar"
+            "main"
+            "footer"
+        }
+      }
+      
+      .header {
+        background: red;
+        color: white;
+        grid-area: header;
+      }
+      
+      .menu {
+        background: none;
+        border: none;
+        margin-left: 20px;
+        display: none;
+      }
+      
+      @media screen and (max-width: 400px) {
+        .menu{
+          display: inline-block;
+        }
+      }
+      
+      .icon {
+        width: 18px;
+        height: 18px;
+        fill: white
+      }
+      
+      .logo {
+        display: inline-block;
+        margin: 0 20px;
+      }
+      
+      .header .nav {
+        display: inline-block;
+        float: right;
+        padding-top: 10px;
+      }
+      
+      @media screen and (max-width: 400px) {
+        .header .nav {
+          display: none;
+        }
+      }
+      
+      .nav-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      
+      .nav-item {
+        list-style-type: none;
+        display: inline-block;
+        margin: 0 20px;
+      }
+      
+      .nav-anchor {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      .nav-anchor:hover {
+        text-decoration: underline;
+      }
+      
+      .sidebar {
+        width: 30%;
+        float: left;
+        background: blue;
+        color: white;
+        grid-area: sidebar;
+      }
+      
+      @supports (display: grid) {
+        .sidebar {
+          width: 100%;
+        }
+      }
+      
+      @media screen and (max-width: 400px) {
+        .sidebar {
+          width: 100%;
+          float: none;
+          max-width: none;
+          display: none;
+        }
+      }
+      
+      .sidebar-header {
+        height: 200px;
+        background: pink;
+        padding: 20px;
+      }
+      
+      .header-title {
+        margin: 0;
+      }
+      
+      .sidebar .nav {
+        float: none;
+        display: block;
+      }
+      
+      .sidebar .nav-item {
+        display: block;
+        padding: 20px;
+      }
+      
+      .main {
+        background: green;
+        color: white;
+        float: left;
+        width: 70%;
+        grid-area: main;
+      }
+      
+      @media screen and (max-width: 400px) {
+        .main {
+          width: 100%;
+          float: none;
+        }
+      }
+      
+      @supports (display: grid) {
+        .main {
+          width: 100%;
+        }
+      }
+      
+      .banner {
+        background: purple;
+        color: white;
+        height: 300px;
+        padding: 20px;
+      }
+      
+      .banner-title {
+        margin: 0;
+      }
+      
+      .section {
+        padding: 20px;
+        clear: both;
+      }
+      
+      .content-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-auto-flow: dense;
+      }
+      
+      @media screen and (max-width: 860px) {
+        .content-row {
+          grid-template-columns: repeat(2, 1fr)
+        }
+      }
+      
+      @media screen and (max-width: 560px) {
+        .content-row {
+          grid-template-columns: 1fr
+        }
+      }
+      
+      .content-row > .item {
+        float: left;
+        width: calc(33.333% - 30px);
+        background: red;
+        padding: 20px;
+        flex: 1;
+        min-width: 150px;
+      }
+      
+      .content-row > .item.big-item {
+        background: yellow;
+        grid-column: 1 / 4;
+      }
+      
+      @supports (display: grid) {
+        .content-row > .item {
+          width: 100%;
+        }
+      }
+      
+      .footer {
+        background: yellow;
+        clear: both;
+        text-align: center;
+        padding: 20px;
+        height: 100px;
+        grid-area: footer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <button type="button" class="menu">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+          </svg>
+        </button>
+        
+        <h1 class="logo">Logo</h1>
+        
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Home
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Link 1
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Link 2
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <h1 class="header-title">
+            Sidebar
+          </h1>
+        </header>
+        
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Home
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Link 1
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-anchor" href="#">
+                Link 2
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main role="main" class="main">
+        <header class="banner">
+          <h1 class="banner-title">Banner</h1>
+        </header>
+        <section class="section">
+          <div class="content-row">
+            <div class="item">
+              <h3>Item 1</h3>
+            </div>
+            <div class="item">
+              <h3>Item 2</h3>
+            </div>
+            <div class="item">
+              <h3>Item 3</h3>
+            </div>
+            <div class="item">
+              <h3>Item 4</h3>
+            </div>
+            <div class="item">
+              <h3>Item 5</h3>
+            </div>
+            <div class="item">
+              <h3>Item 6</h3>
+            </div>
+            <div class="item">
+              <h3>Item 7</h3>
+            </div>
+            <div class="item">
+              <h3>Item 8</h3>
+            </div>
+            <div class="item">
+              <h3>Item 9</h3>
+            </div>
+            <div class="item">
+              <h3>Item 10</h3>
+            </div>
+            <div class="item">
+              <h3>Item 11</h3>
+            </div>
+            <div class="item">
+              <h3>Item 12</h3>
+            </div>
+          </div>
+        </section>
+        
+        <section class="section">
+          <h2>
+            Section 1
+          </h2>
+          <p>
+            Vestibulum bibendum lectus leo. Integer at mi nunc. Pellentesque vulputate sapien nec ipsum egestas gravida quis non tortor. Pellentesque orci mauris, molestie fringilla fermentum vel, porta non mi. Vivamus malesuada tincidunt lorem, et malesuada nisl euismod quis. Aenean lobortis nisi non purus ullamcorper aliquam. Etiam lacinia ut tellus eu convallis. Curabitur tortor turpis, rutrum sit amet posuere eu, consectetur id lacus. Fusce in nisi sapien. Nulla facilisi. Donec nunc mauris, iaculis vitae augue eu, iaculis commodo lacus.
+          </p>
+          <p>
+            Vestibulum bibendum lectus leo. Integer at mi nunc. Pellentesque vulputate sapien nec ipsum egestas gravida quis non tortor. Pellentesque orci mauris, molestie fringilla fermentum vel, porta non mi. Vivamus malesuada tincidunt lorem, et malesuada nisl euismod quis. Aenean lobortis nisi non purus ullamcorper aliquam. Etiam lacinia ut tellus eu convallis. Curabitur tortor turpis, rutrum sit amet posuere eu, consectetur id lacus. Fusce in nisi sapien. Nulla facilisi. Donec nunc mauris, iaculis vitae augue eu, iaculis commodo lacus.
+          </p>
+        </section>
+        <section class="section">
+          <h2>
+            Section 2
+          </h2>
+          <p>
+            Vestibulum bibendum lectus leo. Integer at mi nunc. Pellentesque vulputate sapien nec ipsum egestas gravida quis non tortor. Pellentesque orci mauris, molestie fringilla fermentum vel, porta non mi. Vivamus malesuada tincidunt lorem, et malesuada nisl euismod quis. Aenean lobortis nisi non purus ullamcorper aliquam. Etiam lacinia ut tellus eu convallis. Curabitur tortor turpis, rutrum sit amet posuere eu, consectetur id lacus. Fusce in nisi sapien. Nulla facilisi. Donec nunc mauris, iaculis vitae augue eu, iaculis commodo lacus.
+          </p>
+          <p>
+            Vestibulum bibendum lectus leo. Integer at mi nunc. Pellentesque vulputate sapien nec ipsum egestas gravida quis non tortor. Pellentesque orci mauris, molestie fringilla fermentum vel, porta non mi. Vivamus malesuada tincidunt lorem, et malesuada nisl euismod quis. Aenean lobortis nisi non purus ullamcorper aliquam. Etiam lacinia ut tellus eu convallis. Curabitur tortor turpis, rutrum sit amet posuere eu, consectetur id lacus. Fusce in nisi sapien. Nulla facilisi. Donec nunc mauris, iaculis vitae augue eu, iaculis commodo lacus.
+          </p>
+        </section>
+      </main>
+      <footer class="footer">
+        Footer
+      </footer>
+    </div>
+    
+    <script>
+      (() => {
+        const button = document.querySelector('.menu');
+        button.addEventListener('click', toggleSidebar);
+        function toggleSidebar () {
+          const sideBar = document.querySelector('.sidebar');
+          sideBar.style.display === 'none' ? sideBar.style.display = 'block' : sideBar.style.display = 'none';
+        } 
+        
+        const items = document.querySelectorAll('.item')
+        for (let indexItem = 0; indexItem < items.length; indexItem++) {
+          const item = items[indexItem];
+          item.addEventListener('click', toggleItem)
+        }
+        
+        function toggleItem (e) {
+          const { target: el } = e;
+          el.classList.toggle('big-item');
+        }
+      })();
+      
+    
+      setTimeout(() => {
+        // document.querySelector('.side-bar').style.display = 'none'
+      }, 2000)
+    </script>
+  </body>
+</html>
